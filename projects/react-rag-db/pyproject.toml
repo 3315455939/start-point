@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "react-rag-db"
+version = "0.1.0"
+description = "ReAct RAG + SQLite hybrid QA with ChromaDB and FastAPI"
+requires-python = ">=3.10"
+dependencies = [
+  "python-dotenv>=1.0.0",
+  "openai>=1.40.0",
+  "httpx>=0.27.0",
+  "pymupdf>=1.24.0",
+  "numpy>=1.26.0",
+  "fastapi>=0.115.0",
+  "uvicorn[standard]>=0.32.0",
+  "langchain>=0.3.0",
+  "langchain-core>=0.3.0",
+  "langchain-openai>=0.2.0",
+  "langchain-community>=0.3.0",
+  "chromadb>=0.5.0",
+  "langchain-chroma>=0.2.0",
+  "jupyter>=1.0.0",
+  "ipykernel>=6.29.0",
+]
+
+[project.scripts]
+react-rag-db = "rag_db.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+rag_db = ["static/*.html"]

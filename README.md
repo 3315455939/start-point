@@ -25,6 +25,14 @@ GitHub: [@3315455939](https://github.com/3315455939)
 
 技术笔记见 [notes/](./notes/) 目录。
 
+### [能力路由库](./notes/capability-routing/)
+
+为 AI Agent 设计的 3 层能力路由体系，灵感来自 [Table-GitHub-Capability-Router](https://github.com/duoduoler-ops/Table-GitHub-Capability-Router)。
+
+### [开发方法论](./notes/methodology/)
+
+系统调试、TDD、验证铁律 — 日常开发参考。
+
 ## 参与贡献
 
 欢迎 Issue 和 PR。详见 [CONTRIBUTING.md](./CONTRIBUTING.md)。

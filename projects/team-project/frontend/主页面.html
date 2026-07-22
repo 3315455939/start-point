@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>桌面工具插件</title>
+  <!-- Tailwind CSS v3 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide 图标库 -->
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.544.0/dist/umd/lucide.min.js"></script>
+  <!-- 统一的 Tailwind 配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1e40af',
+            secondary: '#3b82f6',
+            accent: '#f59e0b',
+            background: '#f9fafb',
+            'text-dark': '#1f2937'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif']
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-in-out',
+            'slide-in': 'slideIn 0.3s ease-in-out',
+            'pulse-slow': 'pulse 3s infinite'
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' }
+            },
+            slideIn: {
+              '0%': { transform: 'translateY(20px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .glass-effect {
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+      }
+      .card-shadow {
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .gradient-bg {
+        background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+      }
+      .gradient-text {
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        background-image: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+      }
+    }
+  </style>
+</head>
+<body class="bg-background min-h-screen font-sans text-text-dark">
+  <!-- 顶部导航栏 -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <i data-lucide="desktop" class="w-6 h-6 text-primary"></i>
+        <h1 class="text-xl font-bold gradient-text">桌面工具插件</h1>
+      </div>
+      <nav>
+        <ul class="flex space-x-1 md:space-x-4">
+          <li>
+            <button id="nav-weather" class="nav-btn active px-3 py-2 rounded-lg flex items-center space-x-1 transition-all hover:bg-blue-50">
+              <i data-lucide="cloud-sun" class="w-4 h-4"></i>
+              <span class="hidden md:inline">天气查询</span>
+            </button>
+          </li>
+          <li>
+            <button id="nav-reminder" class="nav-btn px-3 py-2 rounded-lg flex items-center space-x-1 transition-all hover:bg-blue-50">
+              <i data-lucide="bell" class="w-4 h-4"></i>
+              <span class="hidden md:inline">定时提醒</span>
+            </button>
+          </li>
+          <li>
+            <button id="nav-desktop" class="nav-btn px-3 py-2 rounded-lg flex items-center space-x-1 transition-all hover:bg-blue-50">
+              <i data-lucide="folder-tree" class="w-4 h-4"></i>
+              <span class="hidden md:inline">桌面整理</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 主内容区域 -->
+  <main class="container mx-auto px-4 py-6">
+    <!-- 天气查询模块 -->
+    <section id="weather-module" class="module active animate-fade-in">
+      <div class="bg-white rounded-xl p-6 card-shadow">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <i data-lucide="cloud-sun" class="w-6 h-6 mr-2 text-primary"></i>
+          天气查询
+        </h2>
+        
+        <!-- 搜索框 -->
+        <div class="mb-6">
+          <div class="flex space-x-2">
+            <input 
+              type="text" 
+              id="city-input" 
+              placeholder="请输入城市名称" 
+              class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+            >
+            <button 
+              id="search-btn" 
+              class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all flex items-center"
+            >
+              <i data-lucide="search" class="w-4 h-4 mr-2"></i>
+              查询
+            </button>
+          </div>
+        </div>
+        
+        <!-- 天气结果区域 -->
+        <div id="weather-result" class="hidden">
+          <div class="bg-blue-50 rounded-lg p-4 mb-4">
+            <div class="flex justify-between items-center">
+              <div>
+                <h3 id="city-name" class="text-xl font-bold"></h3>
+                <p id="weather-desc" class="text-gray-600"></p>
+              </div>
+              <div class="text-right">
+                <p id="temperature" class="text-3xl font-bold"></p>
+                <p id="feels-like" class="text-sm text-gray-600"></p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 详细天气信息 -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="bg-white border border-gray-200 rounded-lg p-4 flex flex-col items-center">
+              <i data-lucide="droplets" class="w-6 h-6 text-blue-500 mb-2"></i>
+              <span class="text-sm text-gray-500">湿度</span>
+              <span id="humidity" class="text-lg font-semibold"></span>
+            </div>
+            <div class="bg-white border border-gray-200 rounded-lg p-4 flex flex-col items-center">
+              <i data-lucide="wind" class="w-6 h-6 text-blue-500 mb-2"></i>
+              <span class="text-sm text-gray-500">风速</span>
+              <span id="wind-speed" class="text-lg font-semibold"></span>
+            </div>
+            <div class="bg-white border border-gray-200 rounded-lg p-4 flex flex-col items-center">
+              <i data-lucide="gauge" class="w-6 h-6 text-blue-500 mb-2"></i>
+              <span class="text-sm text-gray-500">气压</span>
+              <span id="pressure" class="text-lg font-semibold"></span>
+            </div>
+            <div class="bg-white border border-gray-200 rounded-lg p-4 flex flex-col items-center">
+              <i data-lucide="sunrise" class="w-6 h-6 text-orange-500 mb-2"></i>
+              <span class="text-sm text-gray-500">日出</span>
+              <span id="sunrise" class="text-lg font-semibold"></span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 历史记录 -->
+        <div id="history-section" class="mt-8">
+          <h3 class="text-lg font-semibold mb-3 flex items-center">
+            <i data-lucide="history" class="w-5 h-5 mr-2 text-gray-500"></i>
+            查询历史
+          </h3>
+          <div id="history-list" class="space-y-2 max-h-40 overflow-y-auto">
+            <!-- 历史记录将在这里动态生成 -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 定时提醒模块 -->
+    <section id="reminder-module" class="module hidden animate-fade-in">
+      <div class="bg-white rounded-xl p-6 card-shadow">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <i data-lucide="bell" class="w-6 h-6 mr-2 text-primary"></i>
+          定时提醒
+        </h2>
+        
+        <!-- 添加提醒表单 -->
+        <div class="bg-blue-50 rounded-lg p-4 mb-6">
+          <h3 class="text-lg font-semibold mb-3">添加新提醒</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- 表单内容省略，以原文件为准 -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
