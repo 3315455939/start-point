@@ -1,0 +1,60 @@
+# Dependencies
+node_modules/
+vendor/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+
+# Secrets & environment
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+credentials.*
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# Build output
+*.exe
+*.dll
+*.so
+*.dylib
+*.o
+*.obj
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.cache
+
+# Large data
+*.zip
+*.tar.gz
+*.7z
+datasets/
