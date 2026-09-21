@@ -31,7 +31,7 @@ GitHub: [@3315455939](https://github.com/3315455939)
 
 ### [开发方法论](./notes/methodology/)
 
-系统调试、TDD、验证铁律 — 日常开发参考。
+系统调试、TDD、验证铁律、证据强度阶梯 — 日常开发参考。
 
 ### [MCP 实践](./notes/mcp/)
 

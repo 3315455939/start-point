@@ -2,6 +2,7 @@
 
 来源：Superpowers 6.1.1 `verification-before-completion` skill（MIT License）
 提取理由：Claude Code 无内置等效，和 soul.md「不做半吊子事」互补。
+配套：[证据强度阶梯](./evidence-strength.md) —— 本篇讲「必须有证据」，那篇讲「什么算证据」。
 
 ---
 
