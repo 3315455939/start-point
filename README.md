@@ -33,6 +33,10 @@ GitHub: [@3315455939](https://github.com/3315455939)
 
 系统调试、TDD、验证铁律 — 日常开发参考。
 
+### [MCP 实践](./notes/mcp/)
+
+受限沙箱下跑 MCP stdio 握手的坑与绕法 — 具名管道 vs 匿名管道。
+
 ## 参与贡献
 
 欢迎 Issue 和 PR。详见 [CONTRIBUTING.md](./CONTRIBUTING.md)。
