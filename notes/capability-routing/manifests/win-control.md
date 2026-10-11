@@ -7,9 +7,9 @@
 
 - **能力 ID:** win-control
 - **名称:** Windows 桌面操控 MCP Server
-- **类型:** MCP
-- **平台:** Claude Code
-- **来源:** 本地 MCP 项目（`win-control-mcp`）
+- **类型:** MCP（16 工具）
+- **平台:** DSH（MCP，注册在 `dsh/profile/cordis.patch.yml`）
+- **来源:** `E:\WorkBuddy content\2026-07-19-21-22-12\win-control-mcp\`
 - **能力槽:** 控制 Windows 窗口/点击/输入/截图/剪贴板/应用启动
 
 ## 存储决策

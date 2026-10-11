@@ -20,7 +20,7 @@
 - **ID:** win-control
 - **能力槽:** 控制 Windows 窗口/点击/输入/截图/剪贴板/应用启动
 - **类型:** MCP（16工具）
-- **平台:** Claude Code
+- **平台:** DSH（内置）
 - **部署与健康:** 已配置 / healthy
 - **调用策略:** conditional（仅用户明确要求桌面操作时）
 - **授权级别:** 普通记录
@@ -45,7 +45,7 @@
 ### ssh-server
 
 - **ID:** ssh-server
-- **能力槽:** SSH 连接 <server-ip>，执行远程命令/部署/服务管理
+- **能力槽:** SSH 连接 101.35.46.2，执行远程命令/部署/服务管理
 - **类型:** CLI
 - **平台:** 共享
 - **部署与健康:** 已配置 / healthy
@@ -59,8 +59,8 @@
 
 - **ID:** web-search
 - **能力槽:** 搜索公开网页并获取内容，生成带来源的摘要
-- **类型:** 内置（WebSearch + WebFetch）
-- **平台:** Claude Code
+- **类型:** 内置（DSH 的 `web_search` + `web_fetch`）
+- **平台:** DSH（内置）
 - **部署与健康:** built-in / healthy
 - **调用策略:** conditional
 - **授权级别:** 普通记录
@@ -73,7 +73,7 @@
 - **ID:** file-ops
 - **能力槽:** 创建/编辑/删除本地文件
 - **类型:** 内置（Write/Edit/Read/Glob/Grep）
-- **平台:** Claude Code
+- **平台:** DSH（内置）
 - **部署与健康:** built-in / healthy
 - **调用策略:** conditional
 - **授权级别:** 普通记录（E盘）；需确认（C盘写入/删除）
@@ -86,7 +86,7 @@
 - **ID:** grep-glob-git
 - **能力槽:** 代码全文搜索/文件名匹配/Git历史与差异
 - **类型:** 内置（Grep/Glob/Bash git）
-- **平台:** Claude Code
+- **平台:** DSH（内置）
 - **部署与健康:** built-in / healthy
 - **调用策略:** auto
 - **授权级别:** 普通记录
