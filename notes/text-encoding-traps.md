@@ -63,6 +63,30 @@ ssh host "echo $b64 | base64 -d | bash"
 
 注意这两条错误都报在远端，很容易被误判成"服务器上的 bash 有问题"，根因其实在本地管道。
 
+## 五、批量改写：Python 在 Windows 上把 `\n` 翻成 `\r\n`
+
+`pathlib.Path.write_text()`（以及文本模式的 `open(..., 'w')`）默认做换行转换：
+写出的 `\n` 在 Windows 上会变成 `\r\n`。用脚本批量改一个本来就是 LF 的文件时，
+整份文件会悄悄变成 CRLF，而你以为自己只动了几行。
+
+实测：给一份 2300 行的 Markdown 插入 28 行标记，跑完 `git` 立刻报
+
+```
+warning: in the working copy of 'docs/lessons.md', CRLF will be replaced by LF the next time Git touches it
+```
+
+按字节数出 **2365 处 CRLF**。
+
+修法二选一：
+
+```python
+p.write_text(text, encoding='utf-8', newline='')        # 关掉换行转换
+p.write_bytes(p.read_bytes().replace(b'\r\n', b'\n'))   # 或直接按字节改回来
+```
+
+判据：**脚本批量改写文本文件之后，立刻用字节检查复核**（第一条给的那条命令），
+不要相信「我只改了几行」。
+
 ## 编码约定（可直接抄）
 
 | 文件类型 | 编码 |
@@ -78,3 +102,4 @@ ssh host "echo $b64 | base64 -d | bash"
 - 读写文本都用字节级检查，不靠肉眼。
 - 大小翻倍 = UTF-16；出现 `EF BF BD` = 真的坏了；只是显示乱 = 显示层假象。
 - 跨进程传中文设 `PYTHONIOENCODING=utf-8`；跨机器传脚本用 base64。
+- 脚本批量改写文本后要复核行尾：文本模式的写入会把 LF 悄悄变成 CRLF。
