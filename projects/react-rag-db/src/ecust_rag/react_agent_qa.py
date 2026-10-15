@@ -16,8 +16,8 @@ from langchain.tools import Tool
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
 
-from rag_db.config import API_KEY, BASE_URL, CHAT_MODEL, HTTP_TIMEOUT
-from rag_db.db import (
+from ecust_rag.config import API_KEY, BASE_URL, CHAT_MODEL, HTTP_TIMEOUT
+from ecust_rag.db import (
     ensure_db,
     execute_readonly_sql,
     format_query_result,
@@ -29,7 +29,7 @@ from rag_db.db import (
     tool_list_students,
     tool_top_students_by_course,
 )
-from rag_db.rag_chroma import build_retrieval_qa
+from ecust_rag.rag_chroma import build_retrieval_qa
 
 
 def _get_chat_model() -> ChatOpenAI:
@@ -48,7 +48,7 @@ def _get_chat_model() -> ChatOpenAI:
 def _build_react_prompt() -> PromptTemplate:
     return PromptTemplate.from_template(
         """
-你是 RAG + 数据库混合问答智能体，需要基于工具完成回答。
+你是华东理工大学问答智能体，需要基于工具完成回答。
 
 你有两类信息源：
 1. PDF/RAG：学校介绍、校史、学院说明、制度文档等文本知识

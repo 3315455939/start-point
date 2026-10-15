@@ -23,8 +23,8 @@ from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
 
-# 从项目根目录或当前目录加载 .env（便于读取 DEEPSEEK_API_KEY）
-load_dotenv()
+# 从项目根目录加载 .env（便于读取 ARK_API_KEY）
+load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
 
 # DeepSeek（OpenAI 兼容）
 _DEEPSEEK_BASE_URL = "https://api.deepseek.com/v1"
@@ -340,7 +340,7 @@ class MultiAgentSystem:
 # ============================================================
 if __name__ == "__main__":
     print("=" * 60)
-    print("Multi-Agent 客服系统（ReAct）")
+    print("第九章 示例 4：Multi-Agent 客服系统（专业线 ReAct）")
     print("=" * 60)
 
     system = MultiAgentSystem()

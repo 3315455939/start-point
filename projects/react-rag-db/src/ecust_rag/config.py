@@ -27,7 +27,7 @@ API_KEY = os.environ.get("ARK_API_KEY")
 BASE_URL = "https://ark.cn-beijing.volces.com/api/v3"
 EMBEDDING_MODEL = "text-embedding-v1"
 CHAT_MODEL = "doubao-seed-2-0-lite-260215"
-HTTP_TIMEOUT = float(os.environ.get("RAG_HTTP_TIMEOUT", "600"))
+HTTP_TIMEOUT = float(os.environ.get("P0413_HTTP_TIMEOUT", "600"))
 
 # DashScope：用于 `DashScopeEmbeddings`（LangChain Community）
 DASHSCOPE_API_KEY = os.environ.get("DASHSCOPE_API_KEY")

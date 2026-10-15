@@ -1,5 +1,5 @@
 """
-启动网页对话（等价于 python -m rag_db serve --index data/index）
+启动网页对话（等价于 python -m ecust_rag serve --index data/index）
 
 用法：在项目根目录执行
   python serve_web.py
@@ -29,7 +29,7 @@ def main() -> None:
     """启动 Uvicorn 并尝试打开浏览器。"""
     import uvicorn
 
-    from rag_db.web import create_app
+    from ecust_rag.web import create_app
 
     index_path = str(INDEX_DIR)
     app = create_app(

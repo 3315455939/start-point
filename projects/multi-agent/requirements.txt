@@ -1,4 +1,14 @@
-python-dotenv>=1.0.0
-langchain>=0.3.0
-langchain-core>=0.3.0
-langchain-openai>=0.2.0
+# Floor raised to 1.x: the code uses the langchain 1.x API
+# (multi_agent_system.py: `from langchain.agents import create_agent`), so the
+# previous `>=0.3.0` disagreed with the code it describes.
+#
+# Keep this file PURE ASCII: pip-audit reads requirement files with the locale
+# codec (cp1252 on the Windows CI runner), so a UTF-8 comment here makes the deps
+# workflow die with UnicodeDecodeError instead of auditing anything.
+python-dotenv>=1.2.4
+langchain>=1.4.3
+langchain-core>=1.6.6
+langchain-openai>=1.6.7
+# Declared but never imported anywhere in this project (static scan), so a
+# version change here carries no code risk.
+langgraph>=1.2.13

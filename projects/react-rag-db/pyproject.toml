@@ -3,9 +3,9 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "react-rag-db"
+name = "ecust-rag"
 version = "0.1.0"
-description = "ReAct RAG + SQLite hybrid QA with ChromaDB and FastAPI"
+description = "ECUST PDF RAG with Ark embeddings and agent"
 requires-python = ">=3.10"
 dependencies = [
   "python-dotenv>=1.0.0",
@@ -15,21 +15,24 @@ dependencies = [
   "numpy>=1.26.0",
   "fastapi>=0.115.0",
   "uvicorn[standard]>=0.32.0",
-  "langchain>=0.3.0",
-  "langchain-core>=0.3.0",
-  "langchain-openai>=0.2.0",
+# 与其它项目相反：本项目的代码是 langchain 0.x API，1.x 已移除那些模块
+# （langchain.chains / langchain.text_splitter）。上界是必需的，理由见 requirements.txt。
+  "langchain>=0.3.0,<1",
+  "langchain-core>=0.3.0,<1",
+  "langchain-openai>=0.2.0,<1",
   "langchain-community>=0.3.0",
-  "chromadb>=0.5.0",
+  # 修 PYSEC-2026-311 / -3813 / -3814 / -3815
+  "chromadb>=1.5.9",
   "langchain-chroma>=0.2.0",
   "jupyter>=1.0.0",
   "ipykernel>=6.29.0",
 ]
 
 [project.scripts]
-react-rag-db = "rag_db.main:main"
+ecust-rag = "ecust_rag.main:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.setuptools.package-data]
-rag_db = ["static/*.html"]
+ecust_rag = ["static/*.html"]

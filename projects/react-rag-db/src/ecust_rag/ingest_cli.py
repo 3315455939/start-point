@@ -14,7 +14,7 @@ from __future__ import annotations
 
 import argparse
 
-from rag_db.rag_chroma import ingest_pdf_to_chroma
+from ecust_rag.rag_chroma import ingest_pdf_to_chroma
 
 
 def run_ingest(
@@ -37,7 +37,7 @@ def run_ingest(
 def main() -> None:
     """命令行入口。"""
     p = argparse.ArgumentParser(description="从 PDF 构建向量索引并保存")
-    p.add_argument("--pdf", type=str, default="document.pdf", help="PDF 路径")
+    p.add_argument("--pdf", type=str, default="ecust.pdf", help="PDF 路径")
     p.add_argument(
         "--out",
         type=str,

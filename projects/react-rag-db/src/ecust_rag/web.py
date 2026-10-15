@@ -23,7 +23,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
-from rag_db.react_agent_qa import build_react_agent_qa
+from ecust_rag.react_agent_qa import build_react_agent_qa
 
 _STATIC_DIR = Path(__file__).resolve().parent / "static"
 

@@ -23,6 +23,7 @@
    - `reminder_module.py`：`ReminderManager`，提醒 CRUD、检查与通知。
    - `organizer_module.py`：桌面扫描、预览、整理与撤销；包含 favorites 持久化。
 - `requirements.txt` — 依赖清单（requests, plyer, winshell）。
+- `organize_desktop.bat` — Windows 批处理实现（参考/备用）。
 
 运行
 ----

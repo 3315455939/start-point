@@ -1,3 +1,26 @@
+# Unlike the other three projects: this one's RAG/agent code uses the langchain
+# 0.x API, and those modules are gone in 1.x.  Measured on langchain 1.4.x:
+#   from langchain.chains import RetrievalQA  -> ModuleNotFoundError
+#   from langchain.text_splitter import ...   -> ModuleNotFoundError
+#   from langchain.agents import AgentExecutor, create_react_agent
+# The old `>=0.3.0` had no upper bound, so pip was free to install 1.x and make
+# that import failure certain.  The bound stops a failure that WILL happen.
+#
+# SECURITY CONSEQUENCE, stated plainly because it is the reason this is a real
+# trade-off and not a free win: the 0.x line carries advisories whose ONLY fixes
+# live in 1.x, so this bound pins the project to vulnerable versions:
+#   langchain                 PYSEC-2026-2192 -> fix 1.3.9
+#   langchain-core            PYSEC-2026-2193 -> fix 1.2.22
+#   langchain-core            PYSEC-2026-2562 -> fix 1.2.11
+#   langchain-openai          PYSEC-2026-76   -> fix 1.1.14
+#   langchain-text-splitters  PYSEC-2026-77   -> fix 1.1.2
+# 14 findings in 5 packages, per the deps workflow.  The genuine fix is migrating
+# the code to 1.x; a manifest edit cannot do it, and removing the bound would only
+# trade a security issue for a guaranteed ImportError.
+#
+# Keep this file PURE ASCII: pip-audit reads requirement files with the locale
+# codec (cp1252 on the Windows CI runner), so a UTF-8 comment here makes the deps
+# workflow die with UnicodeDecodeError instead of auditing anything.
 python-dotenv>=1.0.0
 openai>=1.40.0
 httpx>=0.27.0
@@ -5,11 +28,18 @@ pymupdf>=1.24.0
 numpy>=1.26.0
 fastapi>=0.115.0
 uvicorn[standard]>=0.32.0
-langchain>=0.3.0
-langchain-core>=0.3.0
-langchain-openai>=0.2.0
+langchain>=0.3.0,<1
+langchain-core>=0.3.0,<1
+langchain-openai>=0.2.0,<1
 langchain-community>=0.3.0
-chromadb>=0.5.0
 langchain-chroma>=0.2.0
+# CORRECTION: not a CVE fix.  The deps workflow reports the same 5 advisories
+# against chromadb 1.5.9 and none has a Fix Version (unfixed upstream).
+chromadb>=1.5.9
 jupyter>=1.0.0
 ipykernel>=6.29.0
+# Known, NOT fixed: even pinned to 0.3.x, `from langchain.chains import
+# RetrievalQA` still fails on Python 3.14 -- langchain 0.3's type annotations are
+# incompatible with PEP 649 (TypeError: 'function' object is not subscriptable).
+# Making this project run again means migrating those two imports to
+# langchain_text_splitters + LCEL, which is a code change.

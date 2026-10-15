@@ -31,7 +31,7 @@ from langchain_community.embeddings import (  # type: ignore[import-not-found]
 from langchain_chroma import Chroma  # type: ignore[import-not-found]
 from langchain_openai import ChatOpenAI  # type: ignore[import-not-found]
 
-from rag_db.config import EMBEDDING_MODEL
+from ecust_rag.config import EMBEDDING_MODEL
 
 
 def _embeddings() -> DashScopeEmbeddings:
@@ -55,7 +55,7 @@ def ingest_pdf_to_chroma(
     *,
     chunk_size: int = 1000,
     chunk_overlap: int = 180,
-    collection_name: str = "rag_documents",
+    collection_name: str = "ecust_pdf",
 ) -> int:
     """
     从 PDF 构建并持久化 Chroma 向量库。
@@ -102,7 +102,7 @@ def build_retrieval_qa(
     *,
     llm: ChatOpenAI,
     top_k: int = 5,
-    collection_name: str = "rag_documents",
+    collection_name: str = "ecust_pdf",
 ) -> Any:
     """
     加载 Chroma 向量库并构建 RetrievalQA 链。

@@ -1,22 +1,54 @@
-# Multi-Agent Customer Service System
+# multi-agent —— ReAct 多智能体客服
 
-基于 LangChain ReAct 的多智能体客服系统演示。
+单文件实现的多智能体客服系统（`multi_agent_system.py`，约 15 KB）。
 
-## 架构
+## 结构
 
-- **接待 Agent**：意图路由（售后/技术支持/投诉），无工具，纯 JSON 意图识别
-- **售后 Agent**：订单查询、物流追踪、退款处理（模拟数据）
-- **技术支持 Agent**：产品问题诊断与解决方案推荐
-- **主管 Agent**：投诉升级处理，综合决策
+```
+接待 Agent        无工具，只做意图识别的 JSON 路由，不参与 Action/Observation 循环
+ ├─ 售前 Agent     ReAct
+ ├─ 技术支持 Agent  ReAct
+ └─ 主管 Agent     兜底
+```
+
+各子 Agent 使用符合 ReAct 范式的循环（Thought / Action / Observation / Final Answer），
+由 LangChain 的 `create_agent` 驱动。
+
+## 依赖
+
+```
+python-dotenv
+langchain
+langchain-core
+langchain-openai
+langgraph
+```
+
+`langgraph` 未在文件头直接 import，但 docstring 声明由它驱动；若运行时报缺包，装它。
 
 ## 运行
 
-```bash
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
-export DEEPSEEK_API_KEY="your-deepseek-api-key"
+```
+
+同目录建 `.env`（LLM 走 OpenAI 兼容接口，`langchain_openai.ChatOpenAI`）：
+
+```
+OPENAI_API_KEY=你的密钥
+OPENAI_BASE_URL=可选，指向兼容网关
+```
+
+```powershell
 python multi_agent_system.py
 ```
 
-## 技术栈
+## 构建入口
 
-Python · LangChain (create_agent + langgraph) · DeepSeek Chat
+`requirements.txt`（依赖声明）。
+
+## 状态
+
+单文件原型。未拆分模块、无测试、无配置外置。

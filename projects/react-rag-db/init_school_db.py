@@ -11,7 +11,7 @@ SRC = ROOT / "src"
 if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
-from rag_db.db import ensure_db, reseed_db
+from ecust_rag.db import ensure_db, reseed_db
 
 
 def main() -> None:
