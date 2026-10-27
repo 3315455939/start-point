@@ -15,15 +15,19 @@ dependencies = [
   "numpy>=1.26.0",
   "fastapi>=0.115.0",
   "uvicorn[standard]>=0.32.0",
-# 与其它项目相反：本项目的代码是 langchain 0.x API，1.x 已移除那些模块
-# （langchain.chains / langchain.text_splitter）。上界是必需的，理由见 requirements.txt。
-  "langchain>=0.3.0,<1",
-  "langchain-core>=0.3.0,<1",
-  "langchain-openai>=0.2.0,<1",
-  "langchain-community>=0.3.0",
-  # 修 PYSEC-2026-311 / -3813 / -3814 / -3815
+# 已迁移：代码改用 langchain 1.x + langchain-classic 兼容层
+# （0.3.x 在 Python 3.14 上无法 import，理由见 requirements.txt）。
+  "langchain>=1.4.3",
+  "langchain-core>=1.6.6",
+  "langchain-openai>=1.6.7",
+  "langchain-community>=0.4.2",
+  "langchain-classic>=1.0.8",
+  "langchain-text-splitters>=1.1.2",
+  "langchain-huggingface>=1.0.0",
+  "langchain-chroma>=1.1.0",
+  "sentence-transformers>=5.0.0",
+  "pypdf>=6.0.0",
   "chromadb>=1.5.9",
-  "langchain-chroma>=0.2.0",
   "jupyter>=1.0.0",
   "ipykernel>=6.29.0",
 ]

@@ -128,7 +128,7 @@ git diff --no-index <repo>\dsh\profile\cordis.patch.yml <repo>\.dsh\profiles\web
 | 约束 | 检查方式 |
 |---|---|
 | preset id 匹配 `[a-z0-9][a-z0-9-]*` | 读 `dsh/profile/cordis.patch.yml` 里 `agent-preset-registry` 行的 `config.default` |
-| persona 除 `{{model}}`/`{{cwd}}` 外无 `{{…}}` | 正则扫同一文件里 `preset-<id>` 行的 persona 段 |
+| persona 除 `{{model}}`/`{{provider}}` 外无 `{{…}}` | 正则扫同一文件里 `preset-<id>` 行的 persona 段。**0.2.1-rc.2 起 `cwd` 不再注册**，模板里留着它会在任何模型请求之前抛 `unknown prompt variable` |
 | preset 必须由 `insert` 行声明 | 顶层 `- id: preset-<id>` 只会得到 `patch: entry not found` 并被跳过，boot 仍 exit 0 |
 | `AGENTS.md` ≤ 8 KB | 量字节数 |
 | `AGENTS.md` 与 `CLAUDE.md` 不同时存在 | 同目录共存即失败（两者都会被注入） |
