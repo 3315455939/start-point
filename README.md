@@ -9,7 +9,7 @@
 
 | 目录 | 内容 |
 |---|---|
-| [`notes/`](./notes/) | 技术笔记。Windows 沙箱的强制完整性标签、文本编码陷阱、文档的分层维护 |
+| [`notes/`](./notes/) | 技术笔记。Windows 沙箱的强制完整性标签、文本编码陷阱、文档的分层维护、MCP 工具的统一入口 |
 | [`skills/`](./skills/) | 日常使用的动作说明（审计、环境重建、发布）。写法本身就是方法论的展示 |
 | [`projects/`](./projects/) | 三个可运行的小项目 |
 
@@ -26,6 +26,7 @@
 - [Windows 沙箱的强制完整性标签](./notes/windows-sandbox-integrity.md)：为什么有的目录能写、有的目录一律拒绝，以及两条命令的判据
 - [Windows 上的文本编码陷阱](./notes/text-encoding-traps.md)：读、写、跨进程传文本各有一个坑，附带字节级验证方法
 - [文档的分层维护](./notes/documentation-lifecycle.md)：参考、日志、归档三层各有保鲜期，混用是文档腐败的主因
+- [把 MCP 工具从每一轮提示词里挪出去](./notes/mcp-unified-entry.md)：用常驻代理换掉每轮带着的工具定义，21 个工具 5.7k token 归零
 
 ## 关于我
 
