@@ -1,6 +1,6 @@
 ---
 name: bootstrap
-description: 在新机器上从零恢复 dev-main 环境：装依赖、落 DSH 配置、注册 MCP、验证。
+description: 在新机器上从零恢复 dev-main 环境：装依赖、落 DSH 配置、验证。
 whenToUse: 换新电脑、重装系统后重建环境，或在另一台机器上克隆本仓库后首次配置。
 ---
 
